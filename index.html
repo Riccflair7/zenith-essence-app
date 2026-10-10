@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Zenith &amp; Essence — Find Your Routine</title>
+<meta name="description" content="Answer 3 quick questions and get beauty, wellness and pet care picks matched to you. Plus this week's deals.">
+<meta name="theme-color" content="#43523B">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{--espresso:#2B2118;--cream:#FAF6EF;--green:#43523B;--terra:#A95540;--sage:#7D8C6F}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--cream);color:var(--espresso);min-height:100vh}
+.app{max-width:480px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;padding-bottom:76px}
+header.brand{background:var(--green);color:var(--cream);text-align:center;padding:18px 16px 14px}
+header.brand h1{font-size:20px;letter-spacing:2px;font-weight:800}
+header.brand p{font-size:12px;opacity:.85;margin-top:2px;letter-spacing:.5px}
+main{flex:1;padding:20px 16px}
+.screen{display:none;animation:fade .25s ease}
+.screen.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+h2{font-size:24px;margin-bottom:6px}
+.sub{color:#5c554b;margin-bottom:20px;font-size:15px;line-height:1.5}
+.btn{display:block;width:100%;background:var(--green);color:var(--cream);border:none;border-radius:14px;padding:16px;font-size:17px;font-weight:700;cursor:pointer;margin-top:12px}
+.btn:active{transform:scale(.98)}
+.btn.ghost{background:transparent;color:var(--green);border:2px solid var(--green);margin-top:10px}
+.opt{display:block;width:100%;text-align:left;background:#fff;border:2px solid #e8e0d2;border-radius:14px;padding:16px;font-size:16px;font-weight:600;color:var(--espresso);cursor:pointer;margin-bottom:10px}
+.opt:active{border-color:var(--green);background:#f3efe4}
+.opt .em{font-size:20px;margin-right:10px}
+.back{background:none;border:none;color:var(--sage);font-size:14px;margin-bottom:12px;cursor:pointer;font-weight:600}
+.card{background:#fff;border-radius:16px;overflow:hidden;margin-bottom:14px;box-shadow:0 2px 10px rgba(43,33,24,.08)}
+.card img{width:100%;height:200px;object-fit:cover;background:var(--sage);display:block}
+.card .body{padding:14px 16px}
+.card .name{font-size:16px;font-weight:700;margin-bottom:4px}
+.card .price{font-size:18px;font-weight:800;color:var(--green)}
+.card .was{font-size:14px;color:#8a8177;text-decoration:line-through;margin-left:8px;font-weight:400}
+.badge{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.5px;padding:3px 10px;border-radius:20px;margin-bottom:8px}
+.badge.sale{background:var(--terra);color:#fff}
+.badge.new{background:var(--sage);color:#fff}
+.shop{display:block;text-align:center;background:var(--terra);color:#fff;text-decoration:none;border-radius:12px;padding:13px;font-weight:700;font-size:16px;margin-top:10px}
+.tip{background:#efe9da;border-left:4px solid var(--sage);border-radius:0 12px 12px 0;padding:12px 14px;font-size:14px;margin-bottom:16px;line-height:1.5}
+.shopbanner{display:block;background:var(--green);color:var(--cream);text-align:center;padding:12px;border-radius:12px;text-decoration:none;font-weight:700;font-size:14px;margin-bottom:18px}
+.sect{font-size:19px;font-weight:800;margin:22px 0 12px}
+footer.site{text-align:center;font-size:12px;color:#8a8177;padding:18px}
+footer.site a{color:var(--green);font-weight:600}
+nav.tabs{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #e8e0d2;display:flex;z-index:10;padding-bottom:env(safe-area-inset-bottom)}
+nav.tabs .wrap{max-width:480px;margin:0 auto;display:flex;width:100%}
+nav.tabs button{flex:1;background:none;border:none;padding:12px;font-size:13px;font-weight:700;color:#8a8177;cursor:pointer}
+nav.tabs button.on{color:var(--green)}
+nav.tabs button .ic{font-size:20px;display:block;margin-bottom:2px}
+.hero{text-align:center;padding:26px 0 8px}
+.hero .leaf{font-size:44px}
+.progress{display:flex;gap:6px;margin-bottom:18px}
+.progress i{flex:1;height:4px;border-radius:2px;background:#e0d8c6}
+.progress i.done{background:var(--green)}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="brand"><h1>ZENITH &amp; ESSENCE</h1><p>Beauty · Wellness · Pet Care</p></header>
+<main>
+<!-- QUIZ -->
+<section id="tab-quiz">
+  <div class="screen active" id="q-welcome">
+    <div class="hero"><div class="leaf">🌿</div><h2>Find Your Routine</h2>
+    <p class="sub">Answer 3 quick questions and we'll match you with products made for you.</p></div>
+    <button class="btn" onclick="go('q-who')">Start the quiz</button>
+  </div>
+  <div class="screen" id="q-who">
+    <div class="progress"><i class="done"></i><i></i><i></i></div>
+    <button class="back" onclick="go('q-welcome')">← Back</button>
+    <h2>Who are we shopping for?</h2><p class="sub">Pick one to get started.</p>
+    <button class="opt" onclick="pickWho('skin')"><span class="em">✨</span>My Skin</button>
+    <button class="opt" onclick="pickWho('hair')"><span class="em">💇</span>My Hair</button>
+    <button class="opt" onclick="pickWho('wellness')"><span class="em">🌱</span>My Wellness</button>
+    <button class="opt" onclick="pickWho('pet')"><span class="em">🐾</span>My Pet</button>
+  </div>
+  <div class="screen" id="q-concern">
+    <div class="progress"><i class="done"></i><i class="done"></i><i></i></div>
+    <button class="back" onclick="go('q-who')">← Back</button>
+    <h2>What's your main concern?</h2><p class="sub">Choose the closest match.</p>
+    <div id="concern-list"></div>
+  </div>
+  <div class="screen" id="q-style">
+    <div class="progress"><i class="done"></i><i class="done"></i><i class="done"></i></div>
+    <button class="back" onclick="go('q-concern')">← Back</button>
+    <h2>How do you want to shop?</h2><p class="sub">We'll tailor your picks.</p>
+    <button class="opt" onclick="showResults('simple')">Keep it simple <span style="font-weight:400;color:#8a8177">— top 2 picks</span></button>
+    <button class="opt" onclick="showResults('full')">Full routine <span style="font-weight:400;color:#8a8177">— 3 picks</span></button>
+    <button class="opt" onclick="showResults('steals')">Steals first <span style="font-weight:400;color:#8a8177">— cheapest first</span></button>
+  </div>
+  <div class="screen" id="q-results">
+    <button class="back" onclick="go('q-who')">← Start over</button>
+    <h2>Your routine</h2>
+    <div class="tip" id="tip"></div>
+    <div id="results"></div>
+    <button class="btn ghost" onclick="go('q-who')">Retake quiz</button>
+  </div>
+</section>
+<!-- DEALS -->
+<section id="tab-deals" style="display:none">
+  <a class="shopbanner" href="https://www.essencezenith.com/" target="_blank" rel="noopener">Free shipping on orders over $50 — Shop Zenith &amp; Essence →</a>
+  <h2>Deals</h2><p class="sub">Fresh markdowns &amp; new arrivals, updated weekly.</p>
+  <div class="sect">🔥 On Sale</div><div id="sale-list"></div>
+  <div class="sect">🆕 New Arrivals</div><div id="new-list"></div>
+</section>
+<footer class="site">More at <a href="https://www.essencezenith.com/" target="_blank" rel="noopener">essencezenith.com</a> · <a href="privacy.html">Privacy</a></footer>
+</main>
+</div>
+<nav class="tabs"><div class="wrap">
+<button id="tabbtn-quiz" class="on" onclick="switchTab('quiz')"><span class="ic">🔍</span>Quiz</button>
+<button id="tabbtn-deals" onclick="switchTab('deals')"><span class="ic">🏷️</span>Deals</button>
+</div></nav>
+<script>
+const PRODUCTS = [{"n":"Cofutic Hydrating Skin Care Cream","p":"3.75","u":"https://www.essencezenith.com/product-page/cofutic-hydrating-skin-care-cream","i":"https://static.wixstatic.com/media/ef8e4a_4dec0fa55e4644aa98ef4af000fd5f64~mv2.jpg"},{"n":"Collagen Wrapping Night Face Mask","p":"3.25","u":"https://www.essencezenith.com/product-page/collagen-wrapping-night-face-mask","i":"https://static.wixstatic.com/media/ef8e4a_fc80035d4ec94df5afacfed93da50eb9~mv2.jpg"},{"n":"Konjac Facial Sponge","p":"1","u":"https://www.essencezenith.com/product-page/konjac-facial-sponge","i":"https://static.wixstatic.com/media/ef8e4a_c28643a9803741bc9d43998a1ab94521~mv2.jpg"},{"n":"EELHOE Turmeric Dark Spot Correcting Ser","p":"18.75","u":"https://www.essencezenith.com/product-page/eelhoe-turmeric-dark-spot-correcting-serum","i":"https://static.wixstatic.com/media/ef8e4a_c37702508f434d33bc460da26e69e19f~mv2.jpg"},{"n":"24K Gold Collagen Protein Lifting","p":"1.5","u":"https://www.essencezenith.com/product-page/24k-gold-collagen-protein-lifting","i":"https://static.wixstatic.com/media/ef8e4a_38d8935c0810431bb756e3c8afde102f~mv2.jpg"},{"n":"Pore-Shrinking Moisturizing Face Mask","p":"1.5","u":"https://www.essencezenith.com/product-page/pore-shrinking-moisturizing-face-mask","i":"https://static.wixstatic.com/media/ef8e4a_c3ee238ed41d49de8fa80228771103ed~mv2.jpg"},{"n":"Exfoliating Foot Mask","p":"1.75","u":"https://www.essencezenith.com/product-page/exfoliating-foot-mask","i":"https://static.wixstatic.com/media/ef8e4a_97156502fd344239a1963cf990d214a7~mv2.png"},{"n":"Self-Tanning Face & Body Serum Drops","p":"5.5","u":"https://www.essencezenith.com/product-page/self-tanning-face-body-serum-drops","i":"https://static.wixstatic.com/media/ef8e4a_23095c1e792045949db9d495ea0b6e7d~mv2.jpg"},{"n":"OUHOE Ginseng Hair Growth Lotion","p":"18.75","u":"https://www.essencezenith.com/product-page/ouhoe-ginseng-hair-growth-lotion","i":"https://static.wixstatic.com/media/ef8e4a_4228e5b451b749ffbdc8d0ade8c4a5be~mv2.jpg"},{"n":"East Moon Men's Hair Serum","p":"18.75","u":"https://www.essencezenith.com/product-page/east-moon-mens-hair-serum","i":"https://static.wixstatic.com/media/ef8e4a_4b0b8c89c2b44fc9a3fc09aa5d2587a3~mv2.jpg"},{"n":"Self Cleaning Hair Brush","p":"2.25","u":"https://www.essencezenith.com/product-page/self-cleaning-hair-brush","i":"https://static.wixstatic.com/media/ef8e4a_d68b01b73e044d68955ff3d842dcd9eb~mv2.jpg"},{"n":"Batana Oil Hair Mask Conditioner","p":"3.5","u":"https://www.essencezenith.com/product-page/batana-oil-hair-mask-conditioner","i":"https://static.wixstatic.com/media/ef8e4a_724e111c30574f4a865cedef185ccaaa~mv2.jpg"},{"n":"Jaysui Polygonum Multiflorum Repairing S","p":"22.5","u":"https://www.essencezenith.com/product-page/jaysui-polygonum-multiflorum-repairing-shampoo","i":"https://static.wixstatic.com/media/ef8e4a_749e6c0691ff4ab2ad08b3dff53f2bca~mv2.jpg"},{"n":"Jaysui Black Hair Soap","p":"22.5","u":"https://www.essencezenith.com/product-page/jaysui-black-hair-soap","i":"https://static.wixstatic.com/media/ef8e4a_4e432e19808a491a806662c005d9384d~mv2.png"},{"n":"5-HTP Supplement","p":"45.25","u":"https://www.essencezenith.com/product-page/5-htp-supplement","i":"https://static.wixstatic.com/media/ef8e4a_ca6219b7275e457f8adf59aadbf090f1~mv2.jpg"},{"n":"Sleep Soundproofing Earplugs","p":"1","u":"https://www.essencezenith.com/product-page/sleep-soundproofing-earplugs","i":"https://static.wixstatic.com/media/ef8e4a_1a42e57b75e340f6bc1be304aca50731~mv2.jpg"},{"n":"Caffeine Energy Supplement","p":"7","u":"https://www.essencezenith.com/product-page/caffeine-energy-supplement","i":"https://static.wixstatic.com/media/ef8e4a_233df797841142b6b3526d53e3ff30d0~mv2.jpg"},{"n":"Bee Pearl Capsules Immunity Energy Skin","p":"45.25","u":"https://www.essencezenith.com/product-page/bee-pearl-capsules-immunity-energy-skin","i":"https://static.wixstatic.com/media/ef8e4a_7d3cb12f761a41a0b095285aaa325330~mv2.jpg"},{"n":"Turmeric Gummies Joint Support","p":"38.5","u":"https://www.essencezenith.com/product-page/turmeric-gummies-joint-support","i":"https://static.wixstatic.com/media/ef8e4a_5e1cee3a433d488f87b7b8c61a50400d~mv2.jpg"},{"n":"Turmeric & Ginger Gummies 120ct","p":"47.5","u":"https://www.essencezenith.com/product-page/turmeric-ginger-gummies-120ct","i":"https://static.wixstatic.com/media/ef8e4a_79ee2a89257046ebb5719f655ed45432~mv2.jpeg"},{"n":"Vitamin D3 2000 IU For Women","p":"38.5","u":"https://www.essencezenith.com/product-page/vitamin-d3-2000-iu-for-women","i":"https://static.wixstatic.com/media/ef8e4a_f29a09ed6733408db25d47b08b8daccc~mv2.jpg"},{"n":"Bone And Heart Support Vitamin K2 D3","p":"40.75","u":"https://www.essencezenith.com/product-page/bone-and-heart-support-vitamin-k2-d3","i":"https://static.wixstatic.com/media/ef8e4a_2cd24d92bb1d4e86bc51f06b9f2f8365~mv2.jpg"},{"n":"Grass-Fed Hydrolyzed Collagen Peptides","p":"58.75","u":"https://www.essencezenith.com/product-page/grass-fed-hydrolyzed-collagen-peptides","i":"https://static.wixstatic.com/media/ef8e4a_f1234d9b31a34507b0a8b6b07e86cee3~mv2.jpg"},{"n":"Glutathione Whitening Capsules","p":"5.75","u":"https://www.essencezenith.com/product-page/glutathione-whitening-capsules","i":"https://static.wixstatic.com/media/ef8e4a_a027de593b8943b19d96702d451831c3~mv2.jpg"},{"n":"Silicone Pet Bath Massage Gloves","p":"0.75","u":"https://www.essencezenith.com/product-page/silicone-pet-bath-massage-gloves","i":"https://static.wixstatic.com/media/ef8e4a_26224f4039c24ca385c5951e007f986f~mv2.png"},{"n":"Super Absorbent Pet Bath Towels","p":"6.5","u":"https://www.essencezenith.com/product-page/super-absorbent-pet-bath-towels","i":"https://static.wixstatic.com/media/ef8e4a_72db9beaae0643be92eb846896b167ce~mv2.jpg"},{"n":"Pet Hair Brush Grooming Tool","p":"4.5","u":"https://www.essencezenith.com/product-page/pet-hair-brush-grooming-tool","i":"https://static.wixstatic.com/media/ef8e4a_53b24fd3831349108522a8b2bd194a4c~mv2.jpg"},{"n":"Pet Skin And Coat Soft Granules","p":"7","u":"https://www.essencezenith.com/product-page/pet-skin-and-coat-soft-granules","i":"https://static.wixstatic.com/media/ef8e4a_f4d8a58c8ee44aba8c6dfc87b9d1743f~mv2.png"},{"n":"LED Pet Nail Clippers","p":"1","u":"https://www.essencezenith.com/product-page/led-pet-nail-clippers","i":"https://static.wixstatic.com/media/ef8e4a_a8ded1f9c51b40a482e1fc160fbc9557~mv2.jpg"}];
+const PMAP = {"skin":{"Dry or dull skin":[0,1,2],"Dark spots / uneven tone":[3,4,2],"Large pores / oily skin":[5,2,4],"Rough texture":[2,6,1],"Glow / tan":[7,4,1]},"hair":{"Thinning / growth":[8,9,10],"Dry / damaged":[11,12,13],"Everyday care":[13,10,11]},"wellness":{"Sleep":[14,15],"Energy":[16,17],"Joints":[18,19],"Immunity":[20,21],"Beauty from within":[22,23,17]},"pet":{"Bath time":[24,25,26],"Coat & skin":[27,26,25],"Nails & paws":[28,24,26]}};
+const SALE = [{"n":"45g Dog Nose and Paw Balm Dog Paw Cream ","p":"6.75","w":"10.99","pct":39,"u":"https://www.essencezenith.com/product-page/45g-dog-nose-and-paw-balm-dog-paw-cream-cats-dogs-paw-protector-cream-pet-feet","i":"https://static.wixstatic.com/media/df41d3_313b6a32b33b4fd297d8917866563cbc~mv2.jpg"},{"n":"African Black Vegan Soap Massage Shampoo","p":"24.50","w":"37.99","pct":36,"u":"https://www.essencezenith.com/product-page/african-black-vegan-soap-massage-shampoo-bar-3-in-1-shampoo-body-scalp","i":"https://static.wixstatic.com/media/0c3857_53b0040fe5df4544ae4c62f3c47e09ec~mv2.png"},{"n":"Rose & Hibiscus Leave-In Hydrating Hair ","p":"32.50","w":"48.99","pct":34,"u":"https://www.essencezenith.com/product-page/rose-hibiscus-leave-in-hydrating-hair-mist","i":"https://static.wixstatic.com/media/db22c7_a295b15b10b64e94b34e0f71cff28555~mv2.png"},{"n":"Automatic Drinking Love Pet Bowl Moistur","p":"9.50","w":"13.99","pct":32,"u":"https://www.essencezenith.com/product-page/automatic-drinking-love-pet-bowl-moisture-proof-cat-bowl-dog-basin-dual-use","i":"https://static.wixstatic.com/media/5c3b45_120c7423d6c94a198519a57bac7439ec~mv2.jpg"},{"n":"Raspberry Buttercream Eau De Pooch Pet F","p":"21.25","w":"30.99","pct":31,"u":"https://www.essencezenith.com/product-page/raspberry-buttercream-eau-de-pooch-pet-fragrance-detangler-spray","i":"https://static.wixstatic.com/media/f2c0e6_808698bd6c7a4328920b29536aa8c9a5~mv2.jpg"},{"n":"Slumber Shots Sleep Aid Gummies | 12-Pac","p":"48.75","w":"69.99","pct":30,"u":"https://www.essencezenith.com/product-page/slumber-shots-sleep-aid-gummies-12-pack-wild-berry-pineapple","i":"https://static.wixstatic.com/media/398f9c_0b2422600a1742dc9e1c8a08df4d9526~mv2.jpg"},{"n":"Multivitamin Gummy with Angelica | Melon","p":"48.75","w":"69.99","pct":30,"u":"https://www.essencezenith.com/product-page/multivitamin-gummy-with-angelica-melon-12-pack","i":"https://static.wixstatic.com/media/259f2d_1be6e39507b841779c9f78ad7a3d69a1~mv2.png"},{"n":"BVLGARI - Eau Parfumee the Blanc Eau De ","p":"318.99","w":"428.99","pct":26,"u":"https://www.essencezenith.com/product-page/bvlgari-eau-parfumee-the-blanc-eau-de-toilette-spray","i":"https://static.wixstatic.com/media/510ae5_0c4b8d336f754812bd38c787e2f8ee5a~mv2.jpg"}];
+const TIPS = {"Dry or dull skin":"Layer hydration: cleanse gently, then seal moisture in.","Dark spots / uneven tone":"Be consistent \u2014 brightening works over weeks, not days.","Large pores / oily skin":"Don't over-strip; balanced skin makes less oil.","Rough texture":"Exfoliate 2-3x a week, then moisturize.","Glow / tan":"Build color gradually for the most natural glow.","Thinning / growth":"Scalp care first \u2014 healthy follicles grow healthy hair.","Dry / damaged":"Mask weekly and ease off the heat styling.","Everyday care":"Gentle cleanse, light condition, consistent routine.","Sleep":"Wind down: dim lights, skip screens, keep it consistent.","Energy":"Fuel steady: sleep, water, and a morning boost.","Joints":"Stay moving: gentle daily motion beats weekend warrior.","Immunity":"Daily defense: D3 plus real rest.","Beauty from within":"Glow starts inside: collagen plus hydration.","Bath time":"Make it fun: warm water, gentle scrub, thorough dry.","Coat & skin":"Brush weekly, bathe monthly, watch for flakes.","Nails & paws":"Little and often beats one big stressful session."};
+const NEWIDX = [24, 2, 15, 28, 4, 5, 6, 10];
+let who=null, concern=null;
+function $(id){return document.getElementById(id)}
+function go(id){document.querySelectorAll('#tab-quiz .screen').forEach(s=>s.classList.remove('active'));$(id).classList.add('active');window.scrollTo(0,0)}
+function switchTab(t){
+  $('tab-quiz').style.display = t==='quiz'?'block':'none';
+  $('tab-deals').style.display = t==='deals'?'block':'none';
+  $('tabbtn-quiz').classList.toggle('on',t==='quiz');
+  $('tabbtn-deals').classList.toggle('on',t==='deals');
+  window.scrollTo(0,0);
+}
+function pickWho(w){who=w;const box=$('concern-list');box.innerHTML='';
+  Object.keys(PMAP[w]).forEach(c=>{const b=document.createElement('button');b.className='opt';b.textContent=c;b.onclick=()=>{concern=c;go('q-style')};box.appendChild(b)});
+  go('q-concern')}
+function money(p){return '$'+parseFloat(p).toFixed(2)}
+function card(p,badge){
+  const img = p.i ? `<img src="${p.i}" alt="" loading="lazy" onerror="this.outerHTML='<div style=&quot;height:200px;background:#7D8C6F;color:#fff;display:flex;align-items:center;justify-content:center;font-size:48px;font-weight:800&quot;>${p.n.charAt(0)}</div>'">` : '';
+  return `<div class="card">${img}<div class="body">${badge||''}<div class="name">${p.n}</div><div class="price">${money(p.p)}</div><a class="shop" href="${p.u}" target="_blank" rel="noopener">Shop Now</a></div></div>`;
+}
+function showResults(mode){
+  let idx = PMAP[who][concern].slice();
+  let ps = idx.map(i=>PRODUCTS[i]);
+  if(mode==='steals') ps.sort((a,b)=>parseFloat(a.p)-parseFloat(b.p));
+  if(mode==='simple') ps = ps.slice(0,2); else ps = ps.slice(0,3);
+  $('tip').textContent = '💡 ' + (TIPS[concern]||'Made for your routine.');
+  $('results').innerHTML = ps.map(p=>card(p)).join('');
+  go('q-results');
+}
+// deals
+$('sale-list').innerHTML = SALE.map(s=>card(s,`<span class="badge sale">-${s.pct}%</span>`)).join('');
+$('new-list').innerHTML = NEWIDX.map(i=>card(PRODUCTS[i],'<span class="badge new">NEW</span>')).join('');
+// PWA
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}
+</script>
+</body>
+</html>
